@@ -1,0 +1,8 @@
+{
+    "name": "Trenndal/Blog_PHP",
+    "description": "Blog PHP/MySQL.",
+    "require": {
+        "twbs/bootstrap": "~3.3.7",
+        "twig/twig": "^v1.34.4"
+    }
+}
