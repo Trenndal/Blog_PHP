@@ -1,7 +1,5 @@
 <?php
 
-require 'db-functions.php';
+require 'blog-controller/functions.php';
 
-$posts = getListPosts();
-
-require 'home.php';
+home();
