@@ -1,12 +1,18 @@
 <?php
 require_once 'vendor/autoload.php';
-require 'blog-model/db-functions.php';
+require_once 'blog-model/db-functions.php';
 
-function home(){
-	$loader = new Twig_Loader_Filesystem('blog-view'); 
+function loadTwig($files_path='blog-view'){
+	$loader = new Twig_Loader_Filesystem($files_path); 
 	$twig = new Twig_Environment($loader, array(
 		'cache' => false
 	));
+	return $twig;
+}
+
+function home(){
+	$twig = loadTwig();
+	
 	$args_home = getPage('home');
 	$posts = getPosts();
 	
@@ -16,13 +22,12 @@ function home(){
 }
 
 function showPost($idPost){
-	$loader = new Twig_Loader_Filesystem('blog-view'); 
-	$twig = new Twig_Environment($loader, array(
-		'cache' => false
-	));
+	$twig = loadTwig();
+	
 	$post = getPost($idPost);
 	
 	$template = $twig->loadTemplate('template-post.html.twig');
 	echo $template->render($post); 
 	return '$template';
 }
+
