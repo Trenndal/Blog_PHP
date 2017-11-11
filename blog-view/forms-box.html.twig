@@ -1,0 +1,42 @@
+{% macro password(name, size, value) %}
+	<input type="password" name="{{name}}" value="{{value|e|default('')}}" size="{{size|default(30)}}" />
+{% endmacro %}
+
+{% macro textarea(name, rows, value) %}
+	<textarea name="{{name}}" rows="{{rows|default(1)}}" cols="{{cols|default(30)}}">{{value|e|default('')}}</textarea>
+{% endmacro %}
+
+{% macro text(name) %}
+	<input type="text" class="macroform" name="{{name}}" />
+{% endmacro %}
+
+{% macro uploadImage(name) %}
+	<table><tr><td><input type="file" name="{{name}}" id="{{name}}" ></td><td style="width: 100%;"></td></tr></table>
+{% endmacro %}
+
+{% macro wysiwyg(name) %}
+	<div>
+		<div class="tools">
+			<a id="{{name}}Bold" class="tool_button" data-role="bold" href="#" title="Bold"><i class="fa fa-bold"></i></a>
+			<a id="{{name}}Italic" class="tool_button" data-role="italic" href="#" title="Italic"><i class="fa fa-italic"></i></a>
+			<a id="{{name}}Underline" class="tool_button" data-role="underline" href="#" title="Underline"><i class="fa fa-underline"></i></a>
+			<a class="tool_space" href="#"></a>
+			
+			<a id="{{name}}h1" class="tool_button" data-role="h1" href="#" title="h1"><i class="fa fa-header"></i><sup>1</sup></a>
+			<a id="{{name}}h2" class="tool_button" data-role="h2" href="#" title="h2"><i class="fa fa-header"></i><sup>2</sup></a>
+			<a id="{{name}}h3" class="tool_button" data-role="h3" href="#" title="h3"><i class="fa fa-header"></i><sup>3</sup></a>
+			<a id="{{name}}h4" class="tool_button" data-role="h4" href="#" title="h4"><i class="fa fa-header"></i><sup>4</sup></a>
+			<a id="{{name}}P" class="tool_button" data-role="paragraph" href="#" title="paragraph"><i>P</i></a>
+			<a class="tool_space" href="#"></a>
+			
+			<a id="{{name}}Undo" class="tool_button" data-role="undo" href="#" title="Undo"><i class="fa fa-undo"></i></a>
+			<a id="{{name}}Redo" class="tool_button" data-role="redo" href="#" title="Redo"><i class="fa fa-repeat"></i></a>
+			<a class="tool_space" href="#"></a>
+			
+			<a id="{{name}}URL" class="tool_button" data-role="url" href="#" title="Add link"><i class="fa fa-link"></i></a>
+			<a id="{{name}}IMA" class="tool_button" data-role="ima" href="#" title="Add Image"><i class="fa fa-picture-o"></i></a>
+		</div>
+		<div id="{{name}}Wysiwyg" class="macroform" style="height: 6em;" contenteditable></div>
+		<textarea name="{{name}}" id="{{name}}Copy" required="required" style="display:none;"></textarea>
+	</div>
+{% endmacro %}

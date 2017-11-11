@@ -1,0 +1,84 @@
+{% import "forms-box.html.twig" as forms %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{% block title %}<title>{{title}}</title>{% endblock %}
+
+	
+	{# Style CSS #}
+	<link href="css/admin.css" rel="stylesheet">
+	
+	{# Custom Fonts #}
+	<link href="vendor/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body>
+    <div id="global">
+	
+		{% block header %}
+		<header>
+			<a href="index.php?edit=0"><h1 id="title">{{title}}</h1></a>
+			<p>{{message}}</p>
+		</header>
+		{% endblock %}
+
+	<div class="content">
+		{% block content %}
+		<FORM method="POST" action="index.php?action=save">
+			<table>
+				<tr>
+					<th>Title</th>
+					<td>{{forms.text("title")}}</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<th>Preview</th>
+					<td>{{forms.wysiwyg("preview")}}</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<th>Image</th>
+					<td>{{forms.uploadImage("photo")}}</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<th>Text</th>
+					<td>{{forms.wysiwyg("data")}}</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<th> </th>
+					<td>
+						<input type="SUBMIT" value="Submit">
+					</td>
+				</tr>
+			</table>
+		</FORM>
+		{% endblock %}
+	</div> 
+	  
+	{% block footer %}<footer id="footer"></footer>{% endblock %}
+	  
+	  
+    </div> 
+	
+    {# jQuery #}
+    <script src="vendor/twbs/bootstrap/docs/assets/js/vendor/jquery.min.js"></script>
+	
+	{# Theme JavaScript #}
+    <script src="js/forms-box.js"></script>
+	
+  </body>
+
+</html>
