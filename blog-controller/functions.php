@@ -31,3 +31,12 @@ function showPost($idPost){
 	return '$template';
 }
 
+function editPost($idPost){
+	$twig = loadTwig();
+	
+	//$post = getPost($idPost);
+	
+	$template = $twig->loadTemplate('template-admin.html.twig');
+	echo $template->render(array('title' => 'Edit', 'message' => '')); 
+	return '$template';
+}
