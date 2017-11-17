@@ -1,0 +1,5 @@
+
+# BEGIN BlogPHP
+deny from all
+
+# END BlogPHP

@@ -1,5 +1,12 @@
 
 # BEGIN BlogPHP
+<Files installer.php> 
 
+AuthUserFile .FichierDeMotDePasse 
+AuthGroupFile /dev/null 
+AuthName "Admin right required" 
+AuthType Basic 
+
+</Files> 
 
 # END BlogPHP
