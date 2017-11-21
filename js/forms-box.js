@@ -13,3 +13,14 @@ jQuery(document).ready(function($) {$('.tools a').click(function(e) {
       document.execCommand($(this).data('role'), false, url);
 	} else document.execCommand($(this).data('role'), false, null);
 });});
+
+jQuery(document).ready(function($) {$('.submit').click(function(e) { 
+	var value;
+	var target;
+	$( ".macroform" ).each(function( index ) {
+		value = $(this).html();
+		target = "#"+$(this).attr('id')+"Copy";
+		$(target).val(value);
+	});
+});});
+

@@ -120,19 +120,35 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-2">
+                <div class="col-lg-8 col-lg-offset-2">
                     <p><strong>{{blog.intro|raw}}</strong></p>
                 </div>
+				{% set x=1 %}
 				{% for post in posts %}
-					<div class="row">
+					{% set x=x+1 %}
+					{% if x%2 == 1 %}
+					<div class="row" style="background-color:#cccccc; ">
 						<div class="col-lg-4">
 							<a href="index.php?post={{post.id}}"><img src="{{post.photo}}" class="img-responsive" alt="" style="max-height:250px; max-width:300px;"></a>
 						</div>
 						<div class="col-lg-8">
 							<a href="index.php?post={{post.id}}" style="color:black"><h3>{{post.title}}</h3></a>
-							<a href="index.php?post={{post.id}}"><p>{{post.preview}}</p></a>
+							<a href="index.php?post={{post.id}}"><p>{{post.preview|raw}}</p></a>
 						</div>
+						<div class="col-lg-12"><p></p></div>
 					</div>
+					{% else %}
+					<div class="row" style="">
+						<div class="col-lg-8">
+							<a href="index.php?post={{post.id}}" style="color:black"><h3>{{post.title}}</h3></a>
+							<a href="index.php?post={{post.id}}"><p>{{post.preview|raw}}</p></a>
+						</div>
+						<div class="col-lg-4" >
+							<a href="index.php?post={{post.id}}"><img src="{{post.photo}}" class="img-responsive" alt="" style="max-height:250px; max-width:300px;"></a>
+						</div>
+						<div class="col-lg-12"><p></p></div>
+					</div>
+					{% endif %}
 					<div class="col-lg-12"><p></p></div>
 				{% endfor %}
             </div>
@@ -141,30 +157,32 @@
 	{% endblock %}
 
 	{% block about %}
+	{% if about is defined %}
     {# About Section #}
     <section class="success" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>{{about.title}}</h2>
                     <hr class="star-light">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                    <p>{{about.text1}}</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                    <p>{{about.text2}}</p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
+                        <i class="fa fa-download"></i> {{about.buttonName}}
                     </a>
                 </div>
             </div>
         </div>
     </section>
+	{% endif %}
 	{% endblock %}
 {% endblock %}
 	
@@ -205,35 +223,33 @@
 								<h2>{{footer.contactname}}</h2>
 							</div>
 							<div class="col-lg-6 col-xs-10 col-lg-offset-1 col-xs-offset-1">
-								{# To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. #}
-								{# The form should work on most web servers, but if the form is not working you may need to configure your web server differently. #}
-								<form name="sentMessage" id="contactForm" novalidate>
-								<p></p>
+								<form name="sentMessage" id="contactForm" action="index.php" method="POST">
+								<p style="color:red;">{{mail.replie}}</p>
 									<div class="row control-group">
 										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label>Name</label>
-											<input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+											<label>{{mail.name|default('Name')}}</label>
+											<input type="text" class="form-control" placeholder="{{mail.replie is defined ? (mail.value.name is defined ? mail.value.name : mail.err_name|default('Please enter your name.') ) : mail.name|default('Name')}}" name="name" required >
 											<p class="help-block text-danger"></p>
 										</div>
 									</div>
 									<div class="row control-group">
 										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label>Email Address</label>
-											<input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+											<label>{{mail.email|default('Email Address')}}</label>
+											<input type="email" class="form-control" placeholder="{{mail.replie is defined ? (mail.value.email is defined ? mail.value.email : mail.err_email|default('Please enter your email address.') ) : mail.email|default('Email Address')}}" name="email" required >
 											<p class="help-block text-danger"></p>
 										</div>
 									</div>
 									<div class="row control-group">
 										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label>Phone Number</label>
-											<input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+											<label>{{mail.phone|default('Phone Number')}}</label>
+											<input type="tel" class="form-control" placeholder="{{mail.replie is defined ? (mail.value.phone is defined ? mail.value.phone : mail.phone|default('Phone Number')) : mail.phone|default('Phone Number')}}" name="phone" >
 											<p class="help-block text-danger"></p>
 										</div>
 									</div>
 									<div class="row control-group">
 										<div class="form-group col-xs-12 floating-label-form-group controls">
-											<label>Message</label>
-											<textarea rows="3" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+											<label>{{mail.message|default('Message')}}</label>
+											<textarea rows="3" class="form-control" placeholder="{{mail.replie is defined ? (mail.value.message is defined ? mail.value.message : mail.err_message|default('Please enter a message.') ) : mail.message|default('Message')}}" name="message" required ></textarea>
 											<p class="help-block text-danger"></p>
 										</div>
 									</div>
@@ -241,7 +257,7 @@
 									<div id="success"></div>
 									<div class="row">
 										<div class="form-group col-xs-12">
-											<button type="submit" class="btn btn-success btn-lg">Send</button>
+											<button type="submit" class="btn btn-success btn-lg">{{mail.send|default('Send')}}</button>
 										</div>
 									</div>
 								</form>

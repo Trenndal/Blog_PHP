@@ -45,27 +45,20 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> {{nav.menu}} <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">{{nav.title}}</a>
+                <a class="navbar-brand" href="index.php#page-top">{{nav.title}}</a>
             </div>
 
             {# Collect the nav links, forms, and other content for toggling #}
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
-                        <a href="#page-top"></a>
+                        <a href="index.php#page-top"></a>
                     </li>
+					{% for link in nav.links %}
                     <li class="page-scroll">
-                        <a href="#cv">CV</a>
+                        <a href="{{link.href}}">{{link.name}}</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#blog">Projets</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#contact">Contact</a>
-                    </li>
+					{% endfor %}
                 </ul>
             </div>
             {# /.navbar-collapse #}
@@ -81,7 +74,7 @@
                 <div class="col-lg-12">
                     <img class="img-circle" src="{{picture}}" alt="" style="max-height:300px">
                     <div class="intro-text">
-                        <span class="name">{{title}}</span>
+                        <span class="name">{{title is defined ? title : page is defined ? page.title : 'Blog'}}</span>
                         <hr class="star-light">
                         <span class="skills">{{subtitle}}</span>
                     </div>

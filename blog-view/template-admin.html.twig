@@ -28,23 +28,31 @@
 	
 		{% block header %}
 		<header>
-			<a href="index.php?edit=0"><h1 id="title">{{title}}</h1></a>
+			<a href="index.php?edit={{id}}"><h1 id="title">{{title}}</h1></a>
 			<p>{{message}}</p>
 		</header>
 		{% endblock %}
 
 	<div class="content">
 		{% block content %}
-		<FORM method="POST" action="index.php?action=save">
+		{% if post is defined %}
+		<a href="index.php?post={{id}}"><h3>See the Post</h3></a>
+		<FORM action="index.php?action=save&edit={{id}}" method="POST" >
 			<table>
+				
 				<tr>
 					<th>Title</th>
-					<td>{{forms.text("title")}}</td>
+					<td>{{post.title is defined ? forms.text("title",post.title) : forms.text("title")}}</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<th>Author</th>
+					<td>{{post.author is defined ? forms.text("author",post.author) : forms.text("author")}}</td>
 				</tr>
 				<tr></tr>
 				<tr>
 					<th>Preview</th>
-					<td>{{forms.wysiwyg("preview")}}</td>
+					<td style="max-width:100px;">{{post.preview is defined ? forms.wysiwyg("preview",post.preview) : forms.wysiwyg("preview")}}</td>
 				</tr>
 				<tr></tr>
 				<tr>
@@ -54,17 +62,18 @@
 				<tr></tr>
 				<tr>
 					<th>Text</th>
-					<td>{{forms.wysiwyg("data")}}</td>
+					<td style="max-width:100px;">{{post.data is defined ? forms.wysiwyg("data",post.data) : forms.wysiwyg("data")}}</td>
 				</tr>
 				<tr></tr>
 				<tr>
 					<th> </th>
 					<td>
-						<input type="SUBMIT" value="Submit">
+						<input type="SUBMIT" class="submit" value="Submit">
 					</td>
 				</tr>
 			</table>
 		</FORM>
+		{% endif %}
 		{% endblock %}
 	</div> 
 	  

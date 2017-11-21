@@ -9,10 +9,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-2">
+                    <p>{{date|date("F jS Y")}} by <u>{{author}}</u>.<br/></p>
                     <p style="text-align: center;"><strong>{{preview|raw}}</strong><br/>
 					<img src="{{photo}}" class="img-responsive" alt="" style="max-height:450px; max-width:600px; margin-left: auto; margin-right: auto;"><br/></p>
 					<p>{{data|raw}}</p><br/>
                 </div>
+				<p style="text-align: center;"><strong><a href="index.php?edit={{id}}">Edit this post</a></strong><br/>
             </div>
         </div>
     </section>

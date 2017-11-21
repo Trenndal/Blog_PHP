@@ -14,21 +14,49 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-2">
+                <div class="col-lg-8 col-lg-offset-2">
                     <p><strong>{{blog.intro|raw}}</strong></p>
                 </div>
+				{% set x=1 %}
 				{% for post in posts %}
-					<div class="row">
+					{% set x=x+1 %}
+					{% if x%2 == 1 %}
+					<div class="row" style="background-color:#cccccc; ">
 						<div class="col-lg-4">
 							<a href="index.php?post={{post.id}}"><img src="{{post.photo}}" class="img-responsive" alt="" style="max-height:250px; max-width:300px;"></a>
 						</div>
 						<div class="col-lg-8">
 							<a href="index.php?post={{post.id}}" style="color:black"><h3>{{post.title}}</h3></a>
-							<a href="index.php?post={{post.id}}"><p>{{post.preview}}</p></a>
+							<p>{{post.date|date("F jS Y")}} by <u>{{post.author}}</u>.<br/></p>
+							<a href="index.php?post={{post.id}}"><p>{{post.preview|raw}}</p></a>
 						</div>
+						<div class="col-lg-12"><p></p></div>
 					</div>
+					{% else %}
+					<div class="row" style="">
+						<div class="col-lg-8">
+							<a href="index.php?post={{post.id}}" style="color:black"><h3>{{post.title}}</h3></a>
+							<p>{{post.date|date("F jS Y")}} by <u>{{post.author}}</u>.<br/></p>
+							<a href="index.php?post={{post.id}}"><p>{{post.preview|raw}}</p></a>
+						</div>
+						<div class="col-lg-4" >
+							<a href="index.php?post={{post.id}}"><img src="{{post.photo}}" class="img-responsive" alt="" style="max-height:250px; max-width:300px;"></a>
+						</div>
+						<div class="col-lg-12"><p></p></div>
+					</div>
+					{% endif %}
 					<div class="col-lg-12"><p></p></div>
 				{% endfor %}
+				<div class="col-lg-12"><p></p></div>
+				<div class="col-lg-8 col-lg-offset-2">
+					<ul class="list-inline text-center">
+						<li class=""><a href="index.php?blog={{ nbPage == 0 ? nbBlog : nbBlog~'&page='~(nbPage-1) }}" style="{{ nbPage == 0 ? 'color:black;' : 'Font-Weight: Bold;'}}">{{'<'}}</li>
+						{% for i in 1..nb %}
+							<li class=""><a href="index.php?blog={{ nbPage+1 == i ? nbBlog : nbBlog~'&page='~(i-1) }}" style="{{nbPage+1 == i ? 'color:black;' : 'Font-Weight: Bold;'}}">{{i}}</li>
+						{% endfor %}
+						<li class=""><a href="index.php?blog={{ nbPage+1 == nb ? nbBlog : nbBlog~'&page='~(nbPage+1) }}" style="{{ nbPage+1 == nb ? 'color:black;' : 'Font-Weight: Bold;'}}">{{'>'}}</li>
+					</ul>
+				</div>
             </div>
         </div>
     </section>
