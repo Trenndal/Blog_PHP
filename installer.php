@@ -79,7 +79,7 @@ $style1='""';
 	
 	<div class="main">
 		<br/><br/>
-		<h1>Installation Step <?php echo $step; ?></h1>
+		<h1>Installation Step <?php echo $step; ?>/3</h1>
 		<p style="text-align:center;"><?php
 			echo '<span style="color:red;font-weight: bold;"> '.$err.' <br/><br/></span>';
 			if ($step==1) echo 'Making SQL tables :';
